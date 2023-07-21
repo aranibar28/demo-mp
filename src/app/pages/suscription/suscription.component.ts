@@ -14,7 +14,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class SuscriptionComponent {
   private service = inject(ApiService);
 
-  public planes: Plan[] = [];
+  public preaproval: Plan[] = [];
+  public preaproval_plan: Plan[] = [];
   public loading: boolean = false;
 
   ngOnInit(): void {
@@ -23,8 +24,13 @@ export class SuscriptionComponent {
 
   init_data() {
     this.loading = true;
-    this.service.get_planes().subscribe((res) => {
-      this.planes = res.results;
+    this.service.get_preapproval().subscribe((res) => {
+      this.preaproval = res.results;
+      this.loading = false;
+    });
+
+    this.service.get_preapproval_plan().subscribe((res) => {
+      this.preaproval_plan = res.results;
       this.loading = false;
     });
   }

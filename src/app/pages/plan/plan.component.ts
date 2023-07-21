@@ -15,6 +15,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class PlanComponent implements OnInit {
   @Input() modal!: NgbActiveModal;
+  @Input() data: any = null;
   @Input() id: any = null;
 
   private fb = inject(FormBuilder);
@@ -46,7 +47,15 @@ export class PlanComponent implements OnInit {
   ngOnInit(): void {
     if (this.id) {
       this.loading = true;
-      this.service.get_plan_by_id(this.id).subscribe((data) => {
+      let obs = new Observable<any>();
+
+      if (this.data === 'preapproval') {
+        obs = this.service.get_preapproval_by_id(this.id);
+      } else if (this.data === 'preapproval_plan') {
+        obs = this.service.get_preapproval_plan_by_id(this.id);
+      }
+
+      obs.subscribe((data) => {
         this.loading = false;
         if (data.auto_recurring.frequency === 1) {
           this.myForm.get('frequency')?.setValue('months');
@@ -121,11 +130,20 @@ export class PlanComponent implements OnInit {
     let message = '';
 
     if (this.id) {
-      obs = this.service.update_plan(data, this.id);
+      if (this.data === 'preapproval') {
+        obs = this.service.update_preapproval(data, this.id);
+      } else if (this.data === 'preapproval_plan') {
+        obs = this.service.update_preapproval_plan(data, this.id);
+      }
+
       data.id = this.id;
       message = 'Plan actualizado correctamente.';
     } else {
-      obs = this.service.create_plan(data);
+      if (this.data === 'preapproval') {
+        obs = this.service.create_preapproval(data);
+      } else if (this.data === 'preapproval_plan') {
+        obs = this.service.create_preapproval_plan(data);
+      }
       message = 'Plan creado correctamente.';
     }
 

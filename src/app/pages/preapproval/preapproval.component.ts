@@ -6,12 +6,12 @@ import { PlanComponent } from '../plan/plan.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-index',
+  selector: 'app-preapproval',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './index.component.html',
+  templateUrl: './preapproval.component.html',
 })
-export class IndexComponent implements OnInit {
+export class PreapprovalComponent implements OnInit {
   private service = inject(ApiService);
   private modalService = inject(NgbModal);
 
@@ -24,7 +24,7 @@ export class IndexComponent implements OnInit {
 
   init_data() {
     this.loading = true;
-    this.service.get_planes().subscribe((res) => {
+    this.service.get_preapproval().subscribe((res) => {
       this.planes = res.results;
       this.loading = false;
     });
@@ -33,6 +33,7 @@ export class IndexComponent implements OnInit {
   openModal(id?: string) {
     const modalRef = this.modalService.open(PlanComponent, { centered: true });
     modalRef.componentInstance.modal = modalRef;
+    modalRef.componentInstance.data = 'preapproval';
     modalRef.componentInstance.id = id;
     modalRef.closed.subscribe((res) => {
       this.init_data();

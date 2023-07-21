@@ -1,0 +1,37 @@
+<div class="d-flex justify-content-between">
+   <h5>https://api.mercadopago.com/preapproval_plan</h5>
+   <button (click)="openModal()" class="btn btn-success">Nuevo</button>
+</div>
+
+<ng-container *ngIf="loading">
+   <div class="text-center">Cargando...</div>
+</ng-container>
+
+<table *ngIf="!loading" class="table table-striped text-center">
+   <thead>
+      <tr>
+         <th scope="col">#</th>
+         <th scope="col">Descripción</th>
+         <th scope="col">Estado</th>
+         <th scope="col">Monto</th>
+         <th scope="col">Creado</th>
+         <th scope="col">Acciones</th>
+      </tr>
+   </thead>
+   <tbody>
+      <ng-container *ngFor="let item of planes; index as i">
+         <tr>
+            <th>{{ i + 1 }}</th>
+            <td [ngClass]="setColor(item.status)">{{ item.reason }}</td>
+            <td [ngClass]="setColor(item.status)">{{ item.status }}</td>
+            <td [ngClass]="setColor(item.status)">{{ item.auto_recurring.transaction_amount | currency: 'S/ ' }}</td>
+            <td [ngClass]="setColor(item.status)">{{ item.date_created | date }}</td>
+            <td>
+               <button *ngIf="item.status !== 'cancelled'" (click)="openModal(item.id)"
+                  class="btn btn-warning btn-ms">Editar</button>
+            </td>
+         </tr>
+      </ng-container>
+
+   </tbody>
+</table>
