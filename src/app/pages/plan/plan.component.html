@@ -1,0 +1,56 @@
+<div class="modal-content">
+   <div class="modal-header">
+      <h5 class="modal-title">
+         {{ id ? "Actualizar" : "Nuevo" }} Plan <ng-container *ngIf="id">{{ id }}</ng-container>
+      </h5>
+      <button (click)="modal.dismiss()" type="button" class="btn-close"></button>
+   </div>
+
+   <div class="modal-body">
+      <form [formGroup]="myForm" autocomplete="off">
+         <div class="mb-3">
+            <label class="form-label">Nombre del plan <span class="text-danger">*</span></label>
+            <input formControlName="reason" type="text" class="form-control">
+         </div>
+         <div class="mb-3">
+            <label class="form-label">Frecuencia <span class="text-danger">*</span></label>
+            <select formControlName="frequency" class="form-control">
+               <option value="">Seleccionar</option>
+               <option value="months">Mensual</option>
+               <option value="years">Anual</option>
+            </select>
+         </div>
+         <div formGroupName="auto_recurring">
+            <div *ngIf="showInput" class="mb-3">
+               <label class="form-label">Fecha de Facturación <span class="text-danger">*</span></label>
+               <select formControlName="billing_day" class="form-control">
+                  <option value="">Seleccionar</option>
+                  <option *ngFor="let item of days; let i = index" [value]="i + 1">Día {{ i + 1}}</option>
+               </select>
+            </div>
+            <div class="mb-3">
+               <label class="form-label">Precio <span class="text-danger">*</span></label>
+               <input formControlName="transaction_amount" type="number" class="form-control">
+            </div>
+            <div class="mb-3 form-check">
+               <input formControlName="billing_day_proportional" type="checkbox" class="form-check-input"
+                  id="billing_day_proportional">
+               <label class="form-check-label" for="billing_day_proportional">Día de facturación proporcional</label>
+            </div>
+         </div>
+         <div class="mb-3">
+            <label class="form-label">¿A donde quieres redireccionar a tu cliente? <span class="text-danger">*</span></label>
+            <input formControlName="back_url" type="text" class="form-control">
+         </div>
+         <div class="mb-3 form-check">
+            <input formControlName="free_trial" type="checkbox" class="form-check-input" id="free_trial">
+            <label class="form-check-label" for="free_trial">Prueba gratis (1 mes)</label>
+         </div>
+      </form>
+   </div>
+
+   <div class="modal-footer">
+      <button (click)="onSubmit()" [disabled]="load_button" type="button" class="btn btn-primary">Guardar
+         Cambios</button>
+   </div>
+</div>

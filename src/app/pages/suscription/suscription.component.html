@@ -1,0 +1,18 @@
+<div class="container">
+   <div class="row gap-3">
+      <ng-container *ngIf="loading">
+         <div class="text-center">Cargando...</div>
+      </ng-container>
+      <ng-container *ngFor="let item of planes">
+         <ng-container *ngIf="item.status === 'active'">
+            <div class="card col-4 p-5 text-center justify-content-center align-items-center pointer">
+               <div>{{ item.reason }}</div>
+               <div>{{ item.auto_recurring.transaction_amount | currency: "S/ " }}</div>
+               <div>
+                  <a [href]="item.init_point" target="_blank" class="btn btn-success">Seleccionar</a>
+               </div>
+            </div>
+         </ng-container>
+      </ng-container>
+   </div>
+</div>
