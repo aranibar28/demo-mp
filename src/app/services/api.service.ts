@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-const base_url = 'https://api.mercadopago.com';
+const base_url = 'https://server-mercado-pago.vercel.app';
 
 @Injectable({
   providedIn: 'root',
