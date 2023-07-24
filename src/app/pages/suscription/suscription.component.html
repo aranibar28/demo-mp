@@ -6,29 +6,31 @@
       <h5>https://api.mercadopago.com/preapproval</h5>
       <ng-container *ngFor="let item of preaproval">
          <ng-container *ngIf="item.status === 'pending'">
-            <div class="card col-3 p-5 text-center justify-content-center align-items-center pointer">
+            <div class="card col-3 py-3 text-center justify-content-center align-items-center">
                <div>{{ item.reason }}</div>
-               <div>{{ item.auto_recurring.transaction_amount | currency: "S/ " }}</div>
                <div>
-                  <a [href]="item.init_point" target="_blank" class="btn btn-success">Seleccionar</a>
+                  <a [href]="item.init_point" target="_blank" class="btn btn-success">
+                     {{ item.auto_recurring.transaction_amount | currency: "S/ " }}
+                  </a>
                </div>
             </div>
          </ng-container>
       </ng-container>
    </div>
    <hr>
-   <div class="row gap-3">
+   <div class="row gap-3 mb-3">
       <ng-container *ngIf="loading">
          <div class="text-center">Cargando...</div>
       </ng-container>
       <h5>https://api.mercadopago.com/preapproval_plan</h5>
       <ng-container *ngFor="let item of preaproval_plan">
          <ng-container *ngIf="item.status === 'active'">
-            <div class="card col-3 p-5 text-center justify-content-center align-items-center pointer">
+            <div class="card col-3 py-3 text-center justify-content-center align-items-center">
                <div>{{ item.reason }}</div>
-               <div>{{ item.auto_recurring.transaction_amount | currency: "S/ " }}</div>
                <div>
-                  <a [href]="item.init_point" target="_blank" class="btn btn-success">Seleccionar</a>
+                  <a [href]="item.init_point" target="_blank" class="btn btn-success">
+                     {{ item.auto_recurring.transaction_amount | currency: "S/ " }}
+                  </a>
                </div>
             </div>
          </ng-container>
