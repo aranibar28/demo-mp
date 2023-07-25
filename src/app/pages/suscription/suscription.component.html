@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="showPlanes" class="container">
    <div class="row gap-3">
       <ng-container *ngIf="loading">
          <div class="text-center">Cargando...</div>
@@ -8,10 +8,13 @@
          <ng-container *ngIf="item.status === 'pending'">
             <div class="card col-3 py-3 text-center justify-content-center align-items-center">
                <div>{{ item.reason }}</div>
-               <div>
+               <div class="d-flex gap-2">
                   <a [href]="item.init_point" target="_blank" class="btn btn-success">
                      {{ item.auto_recurring.transaction_amount | currency: "S/ " }}
                   </a>
+                  <button (click)="onInitPaymets(item)" class="btn btn-info">
+                     MP
+                  </button>
                </div>
             </div>
          </ng-container>
@@ -27,13 +30,20 @@
          <ng-container *ngIf="item.status === 'active'">
             <div class="card col-3 py-3 text-center justify-content-center align-items-center">
                <div>{{ item.reason }}</div>
-               <div>
+               <div class="d-flex gap-2">
                   <a [href]="item.init_point" target="_blank" class="btn btn-success">
                      {{ item.auto_recurring.transaction_amount | currency: "S/ " }}
                   </a>
+                  <button (click)="onInitPaymets(item)" class="btn btn-info">
+                     MP
+                  </button>
                </div>
             </div>
          </ng-container>
       </ng-container>
    </div>
+</div>
+
+<div *ngIf="showPayment" class="container">
+   <app-cards [data]="data"></app-cards>
 </div>

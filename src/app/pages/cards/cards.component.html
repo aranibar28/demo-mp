@@ -1,1 +1,69 @@
-<p>cards works!</p>
+<section class="payment-form dark">
+   <div class="container__payment">
+      <div class="form-payment">
+         <div class="products mb-3">
+            <h2 class="title">RESUMEN</h2>
+            <div class="item">
+               <span class="price" id="summary-price"></span>
+               <p class="item-name">Descripcion: <strong>{{ data.reason }}</strong></p>
+            </div>
+            <div class="total">
+               Total: <strong>{{ data.auto_recurring.transaction_amount | currency: "S/" }}</strong>
+            </div>
+         </div>
+         <div class="payment-details">
+            <form id="form-checkout">
+               <h3 class="title">DETALLES</h3>
+               <div class="row">
+                  <div class="form-group col">
+                     <input id="form-checkout__cardholderEmail" name="cardholderEmail" type="email"
+                        class="form-control" />
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-sm-5">
+                     <select id="form-checkout__identificationType" name="identificationType"
+                        class="form-control"></select>
+                  </div>
+                  <div class="form-group col-sm-7">
+                     <input id="form-checkout__identificationNumber" name="docNumber" type="text"
+                        class="form-control" />
+                  </div>
+               </div>
+               <br>
+               <h3 class="title">DETALLES TARJETA</h3>
+               <div class="row">
+                  <div class="form-group col-sm-8">
+                     <input id="form-checkout__cardholderName" name="cardholderName" type="text" class="form-control" />
+                  </div>
+                  <div class="form-group col-sm-4">
+                     <div class="input-group expiration-date">
+                        <div id="form-checkout__expirationDate" class="form-control"></div>
+                     </div>
+                  </div>
+                  <div class="form-group col-sm-8">
+                     <div id="form-checkout__cardNumber" class="form-control"></div>
+                  </div>
+                  <div class="form-group col-sm-4">
+                     <div id="form-checkout__securityCode" class="form-control"></div>
+                  </div>
+                  <div id="issuerInput" class="form-group col-sm-12 hidden">
+                     <select id="form-checkout__issuer" name="issuer" class="form-control"></select>
+                  </div>
+                  <div class="form-group col-sm-12">
+                     <select id="form-checkout__installments" name="installments" type="text"
+                        class="form-control"></select>
+                  </div>
+                  <div class="form-group col-sm-12">
+                     <input type="hidden" id="amount" />
+                     <input type="hidden" id="description" />
+                     <div id="validation-error-messages"></div>
+                     <br>
+                     <button id="form-checkout__submit" type="submit" class="btn btn-primary btn-block">PAGAR</button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</section>

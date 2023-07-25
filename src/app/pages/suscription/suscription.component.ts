@@ -4,11 +4,12 @@ import { ApiService } from 'src/app/services/api.service';
 import { Plan } from 'src/app/interfaces/interface';
 import { PlanComponent } from '../plan/plan.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CardsComponent } from '../cards/cards.component';
 
 @Component({
   selector: 'app-suscription',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CardsComponent],
   templateUrl: './suscription.component.html',
 })
 export class SuscriptionComponent {
@@ -17,6 +18,10 @@ export class SuscriptionComponent {
   public preaproval: Plan[] = [];
   public preaproval_plan: Plan[] = [];
   public loading: boolean = false;
+
+  public showPlanes = true;
+  public showPayment = false;
+  public data: any = {};
 
   ngOnInit(): void {
     this.init_data();
@@ -33,5 +38,11 @@ export class SuscriptionComponent {
       this.preaproval_plan = res.results;
       this.loading = false;
     });
+  }
+
+  onInitPaymets(data: any) {
+    this.showPlanes = false;
+    this.showPayment = true;
+    this.data = data;
   }
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-const base_url = 'https://server-mercado-pago.vercel.app';
+const base_url = 'http://localhost:3000';
 
 @Injectable({
   providedIn: 'root',
@@ -46,5 +46,11 @@ export class ApiService {
   update_preapproval_plan(data: any, id: string): Observable<any> {
     const url = `${base_url}/preapproval_plan/${id}`;
     return this.http.put(url, data);
+  }
+
+  //PROCESAR PAGOS:
+  process_payment(data: any): Observable<any> {
+    const url = `${base_url}/process_payment`;
+    return this.http.post(url, data);
   }
 }
