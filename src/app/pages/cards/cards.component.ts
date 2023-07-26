@@ -35,7 +35,9 @@ export class CardsComponent implements OnInit, AfterViewInit {
     cardholderEmail: ['', [Validators.required, Validators.email]],
   });
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.data);
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -145,6 +147,13 @@ export class CardsComponent implements OnInit, AfterViewInit {
         onCardTokenReceived: (errorData: any, token: any) => {
           if (token) {
             console.log(token);
+            const data = {
+              preapproval_plan_id: this.data.id,
+              card_token_id: token.token,
+            };
+            this.service.create_suscription(data).subscribe((res) => {
+              console.log(res);
+            });
           }
           if (errorData && errorData.error.fieldErrors.length !== 0) {
             errorData.error.fieldErrors.forEach((errorMessage: any) => {

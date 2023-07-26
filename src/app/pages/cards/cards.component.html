@@ -25,7 +25,7 @@
          <tr>
             <td>American Express</td>
             <td>3711 803032 57522</td>
-            <td>1234</td>
+            <td>123</td>
             <td>11/25</td>
          </tr>
       </tbody>
@@ -39,6 +39,7 @@
             <div class="item">
                <span class="price" id="summary-price"></span>
                <p class="item-name">Descripcion: <strong>{{ data.reason }}</strong></p>
+               <p>preapproval_plan_id: <strong>{{ data.id }}</strong></p>
             </div>
             <div class="total">
                Total: <strong>{{ data.auto_recurring.transaction_amount | currency: "S/" }}</strong>
